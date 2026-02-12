@@ -18,7 +18,7 @@ function App() {
 
     try {
       // Use local backend URL
-      const response = await axios.post('http://127.0.0.1:8000/api/calculate-trip/', formData);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}api/calculate-trip/`, formData);
       setTripData(response.data);
     } catch (err) {
       console.error(err);
