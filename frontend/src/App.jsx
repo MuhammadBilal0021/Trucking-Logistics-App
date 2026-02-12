@@ -6,6 +6,9 @@ import ELDLog from './components/ELDLog';
 import TripSummary from './components/TripSummary';
 import './index.css';
 
+// Resolve the API base URL: prefer the env variable, fall back to Railway production URL
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://trucking-logistics-app-production.up.railway.app/';
+
 function App() {
   const [tripData, setTripData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -17,8 +20,7 @@ function App() {
     setTripData(null);
 
     try {
-      // Use local backend URL
-      const response = await axios.post('http://127.0.0.1:8000/api/calculate-trip/', formData);
+      const response = await axios.post(`${API_BASE_URL}api/calculate-trip/`, formData);
       setTripData(response.data);
     } catch (err) {
       console.error(err);
